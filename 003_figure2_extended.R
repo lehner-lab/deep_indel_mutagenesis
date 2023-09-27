@@ -2,7 +2,8 @@
 ################ script to re-produce the Extended Figure 2  plots #########
 ############################################################################
 
-##### scatterplots aPCA a)
+### scatterplots aPCA a)
+
 ############ GRB2-SH3
 ## calculate mean sub/position for GRB2-SH3 aPCA
 grb2_mean_sub <- calculate_meansub_pos("GRB2-SH3")
@@ -117,6 +118,7 @@ cor.test(pdz3_mut_type_cor$scaled_fitness_del, pdz3_mut_type_cor$scaled_fitness_
 #########################################################################################################
 #########################################################################################################
 ##### correlation histograms tsuboyama b) and c)
+
 ## subs vs ins_before
 tsuboyama_subVSins_before<-c()
 for (i in unique(tsuboyama_nat_doms_all$pdb_name)){
@@ -448,7 +450,7 @@ summary_df <- df %>%
   summarise(min_fitness = min(scaled_fitness),
             max_fitness = max(scaled_fitness))
 
-### find top label
+### find top and bottom label (max and min scaled_fitness)
 max_scaled_fitness_rows <- df %>%
   group_by(Pos) %>%
   summarise(min_fitness = min(scaled_fitness),
@@ -472,7 +474,7 @@ summary_df <- df %>%
   summarise(min_fitness = min(scaled_fitness),
             max_fitness = max(scaled_fitness))
 
-### find top label
+### find top and bottom label (max and min scaled_fitness)
 max_scaled_fitness_rows <- df %>%
   group_by(Pos) %>%
   summarise(min_fitness = min(scaled_fitness),
@@ -489,6 +491,8 @@ mut_effect_var_plot()
 #########################################################################################################
 #########################################################################################################
 ##### correlation all ins_before vs all subs for Supplemental Figure 2
+
+###### GRB2-SH3
 grb2_df_ins <- scaled_variants_aPCA[scaled_variants_aPCA$domain == "GRB2-SH3" &
                                       scaled_variants_aPCA$type == c("allins"),c("Pos", "scaled_fitness", "scaled_sigma", "insID")]
 
@@ -521,7 +525,7 @@ ggplot(data=grb2_df,
     legend.text = element_text(size = 18, face = "bold")
   )
 
-## pdz3
+###### PSD95-PDZ3
 pdz3_df_ins <- scaled_variants_aPCA[scaled_variants_aPCA$domain == "PSD95-PDZ3" &
                                       scaled_variants_aPCA$type == c("allins"),c("Pos", "scaled_fitness", "scaled_sigma", "insID")]
 
@@ -558,6 +562,8 @@ ggplot(data=pdz3_df,
 #########################################################################################################
 #########################################################################################################
 ##### correlation all ins_after vs all subs for Supplemental Figure 2
+
+###### GRB2-SH3
 grb2_df_ins <- scaled_variants_aPCA[scaled_variants_aPCA$domain == "GRB2-SH3" &
                                       scaled_variants_aPCA$type == c("allins"),c("Pos", "scaled_fitness", "scaled_sigma", "insID")]
 
@@ -591,7 +597,7 @@ ggplot(data=grb2_df,
     legend.text = element_text(size = 18, face = "bold")
   )
 
-## pdz3
+###### PSD95-PDZ3
 pdz3_df_ins <- scaled_variants_aPCA[scaled_variants_aPCA$domain == "PSD95-PDZ3" &
                                       scaled_variants_aPCA$type == c("allins"),c("Pos", "scaled_fitness", "scaled_sigma", "insID")]
 
