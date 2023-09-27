@@ -19,13 +19,13 @@ To run the deep_indel_mutagenesis pipeline you will need the following software 
 
 # Required Data
 
-* i) Predictions from CADD, DDMut, ESM1v, PROVEAN, ii) STRIDE and rSASA information, together with iii)  additional dfs neccesery to run the pipleline should be downloaded as "additional_dfs.rds" from  **[here](https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis&view=0_REMOVE)** 
+* i) Predictions from CADD, DDMut, ESM1v, PROVEAN, ii) STRIDE and rSASA information, together with iii)  additional dfs neccesery to run the pipleline should be downloaded as "additional_dfs.rds" from  **[here](__https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis&view=0)** 
 
-* DiMSum files neccesery for running the deep_indel_mutagenesis pipeline should be downloaded from **[here](https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2FDiMSum&view=0_REMOVE)** 
+* DiMSum files neccesery for running the deep_indel_mutagenesis pipeline should be downloaded from **[here](https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2FDiMSum&view=0)** 
 
 * **[_Tsuboyama et al. 2023_](https://www.nature.com/articles/s41586-023-06328-6)**  raw data ("Tsuboyama2023_Dataset2_Dataset3_20230416.csv") and the pdb files ("AlphaFold_model_PDBs") should be downloaded **[here](https://zenodo.org/record/7992926)** 
 
-* Pre-processed data for reproducing the figures can also be downloaded from **[here](https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2Fpreprocessed%5Fdata&view=0_REMOVE)**
+* Pre-processed data for reproducing the figures can also be downloaded from **[here](https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2Fpreprocessed%5Fdata&view=0)**
 
 # Installation Instructions
 
