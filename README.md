@@ -14,7 +14,7 @@ Welcome to the GitHub repository for: Deep indel mutagenesis reveals the impact 
 To run the deep_indel_mutagenesis pipeline you will need the following software and associated packages:
 
 * **[_R_](https://www.r-project.org/)** (dplyr, modeest, stringr, strex, data.table, bio3d, seqinr, ggplot2, ggridges, GGally, gridExtra, viridis, writexl, matrixStats, vecsets, grpreg, glmnet, glinternet)
-* **[Functions]()** to run the pipeline you will need to download the "Functions" folder, containing custom functions made to process the data for deep_indel_mutagenesis pipeline
+* **[Functions](https://github.com/lehner-lab/deep_indel_mutagenesis/tree/main/Functions)** to run the pipeline you will need to download the "Functions" folder, containing custom functions made to process the data for deep_indel_mutagenesis pipeline
 
 
 # Required Data
