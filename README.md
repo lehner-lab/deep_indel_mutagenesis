@@ -55,7 +55,8 @@ conda install -c conda-forge r-base r-dplyr r-modeest r-stringr r-strex r-data.t
 * **[006_figure5_main]()** Reproduce Fig. 5
 * **[006_figure5_extended]()** Reproduce Extended Fig. 5
 
-Stage 00 and 01 should be run first. The following stages can be ran independently as long as they are ran in pairs (if you want to run 003_figure2_extended, you should run 003_figure2_main first). 
+Stage 00 and 01 should be run first. 
+The following stages can be run independently as long as they are run in pairs (if you want to run 003_figure2_extended, you should run 003_figure2_main first). 
 
 
 
