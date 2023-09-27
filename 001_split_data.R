@@ -1,4 +1,5 @@
-#library(IndelAnalysis)
+## load neccessery packages
+
 library (dplyr)
 library(modeest)
 library(stringr)
@@ -8,25 +9,26 @@ library(bio3d)
 library(seqinr)
 
 
-# PART 1+2: This is the script to generate the df containing all aPCA variants from the 9 domain scan + the 2 domain extended scan from the raw data
-# PART 3: This is the script to reformat the Tsuboyama data from: Tsuboyama, K., Dauparas, J., Chen, J. et al. Mega-scale experimental analysis of protein folding stability in biology and design. Nature 620, 434–444 (2023). https://doi.org/10.1038/s41586-023-06328-6
+# PART 1: This script processes the raw aPCA data from the 9 domain scan. The final output is the "scaled_variants_aPCA" df.
+# PART 2: This script processes the raw bPCA data from the 2 domain scan. The final output is the "scaled_variants_bPCA" df.
+# PART 3: This script processes the Tsuboyama data from: Tsuboyama, K., Dauparas, J., Chen, J. et al. Mega-scale experimental analysis of protein folding stability in biology and design. Nature 620, 434–444 (2023). https://doi.org/10.1038/s41586-023-06328-6
 
-# Section 1:3 (PART 1, PART 2, PART3) can be skipped directly to PART 4 if you want to work with the processed data (download from .rds files)
+# PART 4: skip to PART 4 if you want to work with the pre-processed data from PART1+2+3
 
 ##########################################
 #############   PART 1  ##################
 ##########################################
 
-## this script is used to call variants and generate a df for data analysis of the aPCA 9 domain dataset.
+## this part of the script is used to call variants and generate a df for data analysis of the aPCA 9 domain dataset.
 
-# Call the function to import the "missing variants" from the Variant Data Merge file; variants with 0 counts in output but >5 counts in the input
+# Call the function to import the "missing variants" from the Variant Data Merge file; variants with 0 counts in output but >6 counts in the input
 # we concider those as totally deleterious indels. 
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_variant_data_merge.RData",sep="/")
 P61024_PF01111_missing <- add_0_output_count_variants(input_file_path)
 
 
 ## 1)
-# Call the function to process data for O75400_PF01846 using the Dimsum raw data from the 7 domain selection
+# Call the function to process data for O75400_PF01846 (FBP11-FF1) using the Dimsum raw data from the 7 domain selection
 # here all mutation variants are called
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_fitness_replicates.RData",sep="/")
 results <- process_O75400_PF01846_data(input_file_path)
@@ -50,7 +52,7 @@ O75400_PF01846_Delsub_2 = results[[10]]
 
 
 ## 2)
-# Call the function to process data for P0A9X9_PF00313 using the Dimsum raw data from the 7 domain selection
+# Call the function to process data for P0A9X9_PF00313 (CSPA-CSD) using the Dimsum raw data from the 7 domain selection
 # here all mutation variants are called
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_fitness_replicates.RData",sep="/")
 results <- process_P0A9X9_PF00313_data(input_file_path)
@@ -73,7 +75,7 @@ P0A9X9_PF00313_Delsub = results[[9]]
 P0A9X9_PF00313_Delsub_2 = results[[10]]
 
 ## 3)
-# Call the function to process data for P01053_PF00280 using the Dimsum raw data from the 7 domain selection
+# Call the function to process data for P01053_PF00280 (CI2A-PIN1) using the Dimsum raw data from the 7 domain selection
 # here all mutation variants are called
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_fitness_replicates.RData",sep="/")
 results <- process_P01053_PF00280_data(input_file_path)
@@ -95,7 +97,7 @@ P01053_PF00280_tripleDEL = results[[8]]
 P01053_PF00280_Delsub = results[[9]]
 
 ## 4)
-# Call the function to process data for P02417_PF01281 using the Dimsum raw data from the 7 domain selection
+# Call the function to process data for P02417_PF01281 (BL17-NTL9) using the Dimsum raw data from the 7 domain selection
 # here all mutation variants are called
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_fitness_replicates.RData",sep="/")
 results <- process_P02417_PF01281_data(input_file_path)
@@ -118,7 +120,7 @@ P02417_PF01281_Delsub = results[[9]]
 P02417_PF01281_Delsub_2 = results[[10]]
 
 ## 5)
-# Call the function to process data for P02640_PF02209 using the Dimsum raw data from the 7 domain selection
+# Call the function to process data for P02640_PF02209 (VIL1-HP) using the Dimsum raw data from the 7 domain selection
 # here all mutation variants are called
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_fitness_replicates.RData",sep="/")
 results <- process_P02640_PF02209_data(input_file_path)
@@ -141,7 +143,7 @@ P02640_PF02209_Delsub = results[[9]]
 P02640_PF02209_Delsub_2 = results[[10]]
 
 ## 6)
-# Call the function to process data for P32081_PF00313 using the Dimsum raw data from the 7 domain selection
+# Call the function to process data for P32081_PF00313 (CSPB-CSD) using the Dimsum raw data from the 7 domain selection
 # here all mutation variants are called
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_fitness_replicates.RData",sep="/")
 results <- process_P32081_PF00313_data(input_file_path)
@@ -164,7 +166,7 @@ P32081_PF00313_Delsub = results[[9]]
 P32081_PF00313_Delsub_2 = results[[10]]
 
 ## 7)
-# Call the function to process data for P61024_PF01111 using the Dimsum raw data from the 7 domain selection
+# Call the function to process data for P61024_PF01111 (CKS1) using the Dimsum raw data from the 7 domain selection
 # here all mutation variants are called
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_fitness_replicates.RData",sep="/")
 results <- process_P61024_PF01111_data(input_file_path)
@@ -277,10 +279,10 @@ scaled_variants_aPCA <- results[[1]]
 scaled_variants_aPCA$Pos<-as.numeric(scaled_variants_aPCA$Pos)
 
 ###  structural info obtained by STRIDE: http://webclu.bio.wzw.tum.de/cgi-bin/stride/stridecgi.py
-# loaded in 00_load_function script: structure_info
+# loaded in 00_load_function script as: structure_info
 
 ##  rsasa information obtained with Pymol
-# loaded in 00_load_function script: all_doms_rsasa
+# loaded in 00_load_function script as: all_doms_rsasa
 
 
 ## merge to add structural (stride) and rSASA (pymol) info
@@ -305,7 +307,7 @@ saveRDS(list(scaled_variants_aPCA),
 ##########################################
 #############   PART 2  ##################
 ##########################################
-## this script is used to call variants and generate a df for data analysis of the aPCA and bPCA 2 domain dataset.
+## this script is used to call variants and generate a df for data analysis of the bPCA for 2 domain dataset.
 
 ## 1)
 # Call the function to process data for GRB2-SH3 using the Dimsum raw data from the bPCA for GRB2-SH3
@@ -435,7 +437,7 @@ saveRDS(list(color_scale),
 ## this script is used to download and process Tsuboyama et al., dataset for further analysis.
 ## to use this script you need to download a) Tsuboyama2023_Dataset2_Dataset3_20230416.csv and 
 #                                          b) AlphaFold_model_PDBs from: https://zenodo.org/record/7992926 and 
-#                                          c) the rSASA information obtained from the AlphaFold_model_PDBs using PyMol: tsuboyama_rsasa.rds
+#                                          c) the rSASA information obtained from the AlphaFold_model_PDBs using PyMol: tsuboyama_rsasa.rds (loaded in 00_load_functions step)
 
 # set folder where your Tsuboyama2023_Dataset2_Dataset3_20230416.csv is located
 data_folder <- paste(data_folder_tsuboyama, "Tsuboyama2023_Dataset2_Dataset3_20230416.csv",sep="")
@@ -509,7 +511,7 @@ saveRDS(list(tsuboyama_nat_doms_all,
 ####################################################################################
 ########### skip to here if you want to work with the pre-processed data. ##########
 ####################################################################################
-#library(IndelAnalysis)
+
 library (dplyr)
 library(modeest)
 library(stringr)
