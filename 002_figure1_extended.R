@@ -1,16 +1,17 @@
-library(GGally)
-
 ############################################################################
 ####### script to re-produce the Extended Figure 1 plots #############
 ############################################################################
 
+## load packages
+library(GGally)
+
 ############################################################################
 ######### figure with replicate fitness correlations for aPCA
-## make a list of sequences that I need to find in the fitness replicate Dimsum file
+
+## make a list of sequences that I need to find in the fitness replicate Dimsum file (including indels+substitions+delsubs)
 rep_seq <- c(scaled_variants_aPCA$aa_seq)
 
-## load the data from the fitness replicate  DimSum file that contains fitness estimates for all replicates
-
+## load the data from the fitness replicate  DimSum file that contains fitness estimates for all 3 replicates
 # load raw data data for 7 doms
 input_file_path <- paste(dimsum_file_path, "aPCA_domains_variant_data_merge.RData",sep="")
 load(input_file_path)
@@ -21,22 +22,25 @@ replicates<-all_variants[,c(2,17:22)]
 input_file_path <- paste(dimsum_file_path, "grb2_fold_fitness_replicates.RData",sep="")
 load(input_file_path)
 
+## merge with 7 domains data
 replicates<-rbind(replicates,
                   all_variants[,c(2,17:22)])
+
 # load data for pdz3
 input_file_path <- paste(dimsum_file_path, "pdz3_fold_fitness_replicates.RData",sep="")
 load(input_file_path)
 
+## merge with 7 domains data + GRB2-SH3 data
 replicates<-rbind(replicates,
                   all_variants[,c(2,17:22)])
 
-# keep only the final variants corresponding to scaled_variants_aPCA$aa_seq
+## keep only the final variants corresponding to scaled_variants_aPCA$aa_seq
 replicates_abundance<-replicates
 
 rows_to_keep<-which(replicates_abundance$aa_seq %in% rep_seq)
 replicates_abundance<-replicates_abundance[rows_to_keep,]
 
-## rename columns
+## rename columns, naming them after each biological replicate
 cor_matrix <- replicates_abundance[,c(1:4)]
 colnames(cor_matrix)[1]<-"ID"
 colnames(cor_matrix)[2]<-"S1.1"
@@ -44,7 +48,7 @@ colnames(cor_matrix)[3]<-"S1.2"
 colnames(cor_matrix)[4]<-"S1.3"
 cor_matrix<-as.data.frame(cor_matrix)
 
-## plot correlations
+## plot replicate correlations
 ggpairs(cor_matrix[,c(2:4)],
         columnLabels = c("Rep1", "Rep2", "Rep3"),
         upper = list(continuous = wrap('cor', size = 4)),
@@ -54,7 +58,8 @@ ggpairs(cor_matrix[,c(2:4)],
 
 ############################################################################
 ######### correlations to Tsuboyama et al. data for 5 proteins. 
-# load the Tsuboyama data set with insA and del scores for the 5 overlapping domains
+
+## load the Tsuboyama data set with insA and del scores for the 5 overlapping domains and make a megred df using the make_df_aPCA_versus_Tsuboyama() function
 result <- make_df_aPCA_versus_Tsuboyama()
 cor_tsuboyamaVStopolska_realigned <- result[[1]]
 
@@ -107,6 +112,7 @@ cor.test(cor_tsuboyamaVStopolska_realigned[cor_tsuboyamaVStopolska_realigned$dom
 ######### distributions of 1aa indel effects and calculation of % deleterious
 
 ## plot distribution of  1aa indel effects
+
 ggplot(scaled_variants_aPCA[scaled_variants_aPCA$type %in% c("singleINS", "singleDEL")], 
        aes(x = scaled_fitness, y = mut_type))+
   geom_density_ridges(aes(color=mut_type,
@@ -136,17 +142,18 @@ ggplot(scaled_variants_aPCA[scaled_variants_aPCA$type %in% c("singleINS", "singl
          colour = guide_legend(reverse=T),
          fill = guide_legend(reverse=T))
 
-###### find the mode and the interval of the mode: insertions
+## calculate the precentage deleterious: insertions
+# find the mode and the interval of the mode: insertions
 scaled_fitness <-scaled_variants_aPCA[scaled_variants_aPCA$type == c( "singleINS")]$scaled_fitness
-# Estimate the density using kernel density estimation
+# estimate the density using kernel density estimation
 density_estimate <- density(scaled_fitness)
-# Find the modes of the density estimate
+# find the modes of the density estimate
 mode_values <- density_estimate$x[which(density_estimate$y == max(density_estimate$y))]
-# Calculate the weighted mean of the kernel density estimate
+# calculate the weighted mean of the kernel density estimate
 weighted_mean <- sum(density_estimate$x * density_estimate$y) / sum(density_estimate$y)
-# Calculate the variance of the kernel density estimate using weighted values
+# calculate the variance of the kernel density estimate using weighted values
 weighted_variance <- sum((density_estimate$x - weighted_mean)^2 * density_estimate$y) / sum(density_estimate$y)
-# Calculate the standard deviation as the square root of the weighted variance
+# calculate the standard deviation as the square root of the weighted variance
 std_dev_at_mode <- sqrt(weighted_variance)
 
 # Define the interval around the mode(s)
@@ -174,8 +181,8 @@ cat("Total number of observations:", total_observations, "\n")
 cat("Fraction of observations in the interval:", fraction_in_interval, "\n")
 cat("Percentage of observations in the interval:", percentage_in_interval, "%\n")
 
-
-###### find the mode and the interval of the mode: deletions
+## calculate the precentage deleterious: deletions
+# find the mode and the interval of the mode: deletions
 scaled_fitness <-scaled_variants_aPCA[scaled_variants_aPCA$type == c( "singleDEL")]$scaled_fitness
 # Estimate the density using kernel density estimation
 density_estimate <- density(scaled_fitness)
@@ -227,7 +234,7 @@ colnames(ins_double)[3:4]<-c("scaled_fitness_doubleins", "scaled_sigma_doubleins
 ins_triple<-scaled_variants_aPCA[scaled_variants_aPCA$type == "tripleINS",c(1:2,6:7)]
 colnames(ins_triple)[3:4]<-c("scaled_fitness_tripleins", "scaled_sigma_tripleins")
 
-# make a df
+# make a df all insertions
 all_doms_instypes<-merge(ins_single,
                          ins_double,
                          by=c("Pos","domain"))
@@ -246,7 +253,7 @@ colnames(dels_double)[3:4]<-c("scaled_fitness_doubledels", "scaled_sigma_doubled
 dels_triple<-scaled_variants_aPCA[scaled_variants_aPCA$type == "tripleDEL",c(1:2,6:7)]
 colnames(dels_triple)[3:4]<-c("scaled_fitness_tripledels", "scaled_sigma_tripledels")
 
-
+# make a df all deletions
 all_doms_delstypes<-merge(dels_single,
                           dels_double,
                           by=c("Pos","domain"))
@@ -290,7 +297,7 @@ cor.test(all_doms_insVSdel$scaled_fitness_singledels,
          all_doms_insVSdel$scaled_fitness_singleins,
          method="pearson")
 
-## 1 aa indels correlation plot: per domain
+## 1 aa indels correlation plot: correlation of effects per domain
 all_doms_insVSdel_1aa_cor<-c()
 for (i in unique(all_doms_insVSdel$domain)){
   temp<-cor.test(all_doms_insVSdel[domain==i ,]$scaled_fitness_singleins,
@@ -322,6 +329,7 @@ all_doms_insVSdel_1aa_cor$domain<- factor(all_doms_insVSdel_1aa_cor$domain, leve
                                                                                        "CSPA-CSD",
                                                                                        "VIL1-HP",
                                                                                        "FBP11-FF1"), ordered = TRUE)
+# plot
 ggplot(data=all_doms_insVSdel_1aa_cor,
        aes(x=cor,
            y=domain,
@@ -377,7 +385,7 @@ cor.test(all_doms_insVSdel$scaled_fitness_doubledels,
          all_doms_insVSdel$scaled_fitness_doubleins,
          method="pearson")
 
-## 2 aa indels correlation plot: per domain
+## 2 aa indels correlation plot: correlation per domain
 all_doms_insVSdel_2aa_cor<-c()
 for (i in unique(all_doms_insVSdel$domain)){
   temp<-cor.test(all_doms_insVSdel[domain==i ,]$scaled_fitness_doubleins,
@@ -409,6 +417,7 @@ all_doms_insVSdel_2aa_cor$domain<- factor(all_doms_insVSdel_2aa_cor$domain, leve
                                                                                        "CSPA-CSD",
                                                                                        "VIL1-HP",
                                                                                        "FBP11-FF1"), ordered = TRUE)
+# plot
 ggplot(data=all_doms_insVSdel_2aa_cor,
        aes(x=cor,
            y=domain,
@@ -462,7 +471,7 @@ cor.test(all_doms_insVSdel$scaled_fitness_tripledels,
          all_doms_insVSdel$scaled_fitness_tripleins,
          method="pearson")
 
-## 3 aa indels correlation plot: per domain
+## 3 aa indels correlation plot: correlation per domain
 all_doms_insVSdel_3aa_cor<-c()
 for (i in unique(all_doms_insVSdel$domain)){
   temp<-cor.test(all_doms_insVSdel[domain==i ,]$scaled_fitness_tripleins,
@@ -494,6 +503,7 @@ all_doms_insVSdel_3aa_cor$domain<- factor(all_doms_insVSdel_3aa_cor$domain, leve
                                                                                        "CSPA-CSD",
                                                                                        "VIL1-HP",
                                                                                        "FBP11-FF1"), ordered = TRUE)
+# plot
 ggplot(data=all_doms_insVSdel_3aa_cor,
        aes(x=cor,
            y=domain,
@@ -551,7 +561,7 @@ cor.test(all_doms_insVSdel$scaled_fitness_singleins,
          all_doms_insVSdel$scaled_fitness_doubleins,
          method="pearson")
 
-## 1 vs 2 aa insertions correlation plot: per domain
+## 1 vs 2 aa insertions correlation plot: correlation per domain
 all_doms_insVSdel_1vs2aa_cor<-c()
 for (i in unique(all_doms_insVSdel$domain)){
   temp<-cor.test(all_doms_insVSdel[domain==i ,]$scaled_fitness_singleins,
@@ -583,6 +593,7 @@ all_doms_insVSdel_1vs2aa_cor$domain<- factor(all_doms_insVSdel_1vs2aa_cor$domain
                                                                                        "CSPA-CSD",
                                                                                        "VIL1-HP",
                                                                                        "FBP11-FF1"), ordered = TRUE)
+# plot
 ggplot(data=all_doms_insVSdel_1vs2aa_cor,
        aes(x=cor,
            y=domain,
@@ -636,7 +647,7 @@ cor.test(all_doms_insVSdel$scaled_fitness_singleins,
          all_doms_insVSdel$scaled_fitness_tripleins,
          method="pearson")
 
-## 1 vs 3 aa insertions correlation plot: per domain
+## 1 vs 3 aa insertions correlation plot: correlation per domain
 all_doms_insVSdel_1vs3aa_cor<-c()
 for (i in unique(all_doms_insVSdel$domain)){
   temp<-cor.test(all_doms_insVSdel[domain==i ,]$scaled_fitness_singleins,
@@ -668,6 +679,7 @@ all_doms_insVSdel_1vs3aa_cor$domain<- factor(all_doms_insVSdel_1vs3aa_cor$domain
                                                                                              "CSPA-CSD",
                                                                                              "VIL1-HP",
                                                                                              "FBP11-FF1"), ordered = TRUE)
+# plot
 ggplot(data=all_doms_insVSdel_1vs3aa_cor,
        aes(x=cor,
            y=domain,
@@ -694,6 +706,7 @@ ggplot(data=all_doms_insVSdel_1vs3aa_cor,
 
 ############################################################################
 ######### correlations of 1-3 aa indel effects: deletions only
+
 ## 1 vs 2 aa deletions correlation plot: scatter
 ggplot(data=all_doms_insVSdel,
        aes(x=scaled_fitness_singledels,
@@ -724,7 +737,7 @@ cor.test(all_doms_insVSdel$scaled_fitness_singledels,
          all_doms_insVSdel$scaled_fitness_doubledels,
          method="pearson")
 
-## 1 vs 2 aa deletions correlation plot: per domain
+## 1 vs 2 aa deletions correlation plot: correlation per domain
 all_doms_insVSdel_1vs2aa_cor<-c()
 for (i in unique(all_doms_insVSdel$domain)){
   temp<-cor.test(all_doms_insVSdel[domain==i ,]$scaled_fitness_singledels,
@@ -756,6 +769,7 @@ all_doms_insVSdel_1vs2aa_cor$domain<- factor(all_doms_insVSdel_1vs2aa_cor$domain
                                                                                              "CSPA-CSD",
                                                                                              "VIL1-HP",
                                                                                              "FBP11-FF1"), ordered = TRUE)
+# plot
 ggplot(data=all_doms_insVSdel_1vs2aa_cor,
        aes(x=cor,
            y=domain,
@@ -809,7 +823,7 @@ cor.test(all_doms_insVSdel$scaled_fitness_singledels,
          all_doms_insVSdel$scaled_fitness_tripledels,
          method="pearson")
 
-## 1 vs 3 aa deletions correlation plot: per domain
+## 1 vs 3 aa deletions correlation plot: correlation per domain
 all_doms_insVSdel_1vs3aa_cor<-c()
 for (i in unique(all_doms_insVSdel$domain)){
   temp<-cor.test(all_doms_insVSdel[domain==i ,]$scaled_fitness_singledels,
@@ -841,6 +855,7 @@ all_doms_insVSdel_1vs3aa_cor$domain<- factor(all_doms_insVSdel_1vs3aa_cor$domain
                                                                                              "CSPA-CSD",
                                                                                              "VIL1-HP",
                                                                                              "FBP11-FF1"), ordered = TRUE)
+# plot
 ggplot(data=all_doms_insVSdel_1vs3aa_cor,
        aes(x=cor,
            y=domain,
