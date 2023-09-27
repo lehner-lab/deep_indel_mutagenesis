@@ -44,16 +44,16 @@ conda install -c conda-forge r-base r-dplyr r-modeest r-stringr r-strex r-data.t
 * **[01_split_data](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/001_split_data.R)**
   In stage 01 of the pipeline, we process the raw DiMSum files and call the indel and substitution variants.    Furthermore we process the **[_Tsuboyama et al. 2023_](https://www.nature.com/articles/s41586-023-06328-6)**  data set for further analysis. In this script you have an option to either process the data yourself (PART1, PART2 and PART3) or directly load the processed data frames for further analysis (skip to PART4 and download **[pre-processed data](https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2Fpreprocessed%5Fdata&view=0)**).
 
-* **[002_figure1_main]()** Reproduce Fig. 1
-* **[002_figure1_extended]()** Reproduce Extended Fig. 1
-* **[003_figure2_main]()** Reproduce Fig. 2
-* **[003_figure2_extended]()** Reproduce Extended Fig. 2
-* **[004_figure3_main]()** Reproduce Fig. 3
-* **[004_figure3_extended]()** Reproduce Extended Fig. 3
-* **[005_figure4_main]()** Reproduce Fig. 4
-* **[005_figure4_extended]()** Reproduce Extended Fig. 4
-* **[006_figure5_main]()** Reproduce Fig. 5
-* **[006_figure5_extended]()** Reproduce Extended Fig. 5
+* **[002_figure1_main](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/002_figure1_main.R)** Reproduce Fig. 1
+* **[002_figure1_extended](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/002_figure1_extended.R)** Reproduce Extended Fig. 1
+* **[003_figure2_main](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/003_figure2_main.R)** Reproduce Fig. 2
+* **[003_figure2_extended](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/003_figure2_extended.R)** Reproduce Extended Fig. 2
+* **[004_figure3_main](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/004_figure3_main.R)** Reproduce Fig. 3
+* **[004_figure3_extended](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/004_figure3_main.R)** Reproduce Extended Fig. 3
+* **[005_figure4_main](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/005_figure4_main.R)** Reproduce Fig. 4
+* **[005_figure4_extended](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/005_figure4_main.R)** Reproduce Extended Fig. 4
+* **[006_figure5_main](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/006_figure5_main.R)** Reproduce Fig. 5
+* **[006_figure5_extended](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/006_figure5_extended.R)** Reproduce Extended Fig. 5
 
 Stage 00 and 01 should be run first. 
 The following stages can be run independently as long as they are run in pairs (if you want to run 003_figure2_extended, you should run 003_figure2_main first). 
