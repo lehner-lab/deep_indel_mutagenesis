@@ -38,7 +38,7 @@ conda install -c conda-forge r-base r-dplyr r-modeest r-stringr r-strex r-data.t
 
 # Usage
 
-* **[00_load_functions](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/00_load_functions.R)** 
+* **[000_load_functions](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/000_load_functions.R)** 
   In stage 00 of the pipeline, we load and set folder location for the Required Data and load the Required Software
 
 * **[01_split_data](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/001_split_data.R)**
