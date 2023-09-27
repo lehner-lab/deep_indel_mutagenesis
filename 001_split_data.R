@@ -549,7 +549,7 @@ scaled_variants_bPCA=tmp[[1]]
 ## download data for coomon color scale across all heatmaps, filename: color_scale
 # define the location where the color_scale.rds is downloaded and saved
 output_location <- output_location_colorscale
-output_namec<-"color_scale.rds"
+output_name<-"color_scale.rds"
 # read the df
 tmp<-readRDS(file=paste(output_location,
                         output_name, sep="/"))
