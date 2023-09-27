@@ -25,7 +25,7 @@ To run the deep_indel_mutagenesis pipeline you will need the following software 
 
 * **[_Tsuboyama et al. 2023_](https://www.nature.com/articles/s41586-023-06328-6)**  raw data ("Tsuboyama2023_Dataset2_Dataset3_20230416.csv") and the pdb files ("AlphaFold_model_PDBs") should be downloaded **[here](https://zenodo.org/record/7992926)** 
 
-* Pre-processed data for reproducing the figures can also be downloaded from **[here]([https://zenodo.org/record/7992926](https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2Fpreprocessed%5Fdata&view=0)**
+* Pre-processed data for reproducing the figures can also be downloaded from **[here](https://zenodo.org/record/7992926](https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2Fpreprocessed%5Fdata&view=0)**
 
 # Installation Instructions
 
