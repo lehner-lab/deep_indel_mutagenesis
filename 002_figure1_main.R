@@ -1,13 +1,16 @@
-library(ggplot2)
-library(ggridges)
-
 ############################################################################
 ################ script to re-produce the Figure 1  plots #################
 ############################################################################
 
+## load packages
+
+library(ggplot2)
+library(ggridges)
+
 #########################################################################################################
-##### correlation aPCA and in vitro ddG Figure 1
-## load data for the aPCA validation in Figure 1: correlation of aPCA score and in vitro ddG for substitution mutants
+### correlation aPCA and in vitro ddG Figure 1
+
+## extract domain name
 validated_domains_in_vitro_ddGs_and_growthrates$domain<-substr(validated_domains_in_vitro_ddGs_and_growthrates$variant_ID,1,14)
 
 ## change the domain name
@@ -37,10 +40,10 @@ plot_cor_aPCA_invitroddG(doms_invitro_ddG_vs_gr[doms_invitro_ddG_vs_gr$domain=="
 
 #########################################################################################################
 #### density plots Figure 1
-## split into indel and substitution+indel df
+
+## split main df into indel and substitution+indel df
 scaled_variants_aPCA_indels<-scaled_variants_aPCA[scaled_variants_aPCA$mut_type %in% c("insertions", "deletions"),]
 scaled_variants_aPCA_substitutions_indels<-scaled_variants_aPCA[scaled_variants_aPCA$mut_type %in% c("insertions", "deletions","substitutions"),]
-
 
 ## FBP11-FF1
 plot_density_single_indels(scaled_variants_aPCA_substitutions_indels[scaled_variants_aPCA_substitutions_indels$domain == "FBP11-FF1",])
@@ -353,7 +356,7 @@ make_lineplots_single_effects_subs(scaled_variants_aPCA_singleINS  %>% filter(do
 ############################################################################
 ######### box plot of 1-3aa indel effects
 
-#### deletions
+#### isolate deletions
 data <- scaled_variants_aPCA[scaled_variants_aPCA$mut_type == "deletions",]
 # Define custom colors with fading
 color1<-"#7AD151FF"
@@ -362,7 +365,7 @@ color3<-adjustcolor("#7AD151FF", alpha.f = 0.4)
 
 custom_colors <- c(color2, color1, color3)
 
-# Create the ggplot
+# create the ggplot
 ggplot(data, aes(x = factor(type, levels = c("singleDEL", "doubleDEL", "tripleDEL")), y = scaled_fitness, fill = type)) +
   geom_boxplot() +
   scale_fill_manual(values = custom_colors) +  # Use the custom colors
@@ -382,7 +385,7 @@ p_values <- pairwise.wilcox.test(data$scaled_fitness, data$type, p.adjust.method
 cat("Wilcoxon Test P-values (Bonferroni-adjusted):\n")
 print(p_values$p.value)
 
-#### insertions
+#### isolate insertions
 data <- scaled_variants_aPCA[scaled_variants_aPCA$mut_type == "insertions",]
 # Define custom colors with fading
 color1<-"#2A788EFF"
