@@ -227,6 +227,7 @@ grb2_mut_type_cor <- merge(scaled_variants_aPCA[scaled_variants_aPCA$type == "si
                            by = c("Pos")) 
 
 ## now add ins_before and ins_afer: 1x CCC
+# ins after can be caluclated by substracting -1 from $Pos column
 grb2_ins_before <- scaled_variants_aPCA[scaled_variants_aPCA$type == "singleINS" & 
                                           scaled_variants_aPCA$domain == "GRB2-SH3",
                                         c("Pos", "scaled_fitness", "scaled_sigma")]
@@ -337,6 +338,7 @@ cor.test(pdz3_mut_type_cor$scaled_fitness_del, pdz3_mut_type_cor$scaled_fitness_
 #########################################################################################################
 #########################################################################################################
 ##### correlation histograms tsuboyama Figure 2c: mutation types
+                        
 ## subs vs deletions
 tsuboyama_subVSdel<-c()
 for (i in unique(tsuboyama_nat_doms_all$pdb_name)){
@@ -704,8 +706,8 @@ variation_data_pos_grb2_ins <- grb2_allins %>%
   )
 
 ## plot
-color1 <- adjustcolor("#414487FF", alpha.f = 0.8) # deletion color
-color2 <- adjustcolor("#2A788EFF", alpha.f = 0.8) # insertion before color
+color1 <- adjustcolor("#414487FF", alpha.f = 0.8) 
+color2 <- adjustcolor("#2A788EFF", alpha.f = 0.8) 
 
 ggplot() +
   geom_bar(data=variation_data_pos_grb2_ins, aes(x=Pos,y = sd_ins_pos, fill = "Insertion"), stat = "identity", position = "dodge", alpha = 0.5) +
@@ -767,7 +769,6 @@ ggplot() +
 scatter_for_fig2_2(grb2_subs, grb2_allins)
 
 ## PSD95-PDZ3
-colnames(pdz3_allins)[4]<-"Mut"
 scatter_for_fig2_2(pdz3_subs, pdz3_allins)
 
 
@@ -785,7 +786,7 @@ summary_df <- df %>%
   summarise(min_fitness = min(scaled_fitness),
             max_fitness = max(scaled_fitness))
 
-### find top label
+### find top and bottom label (max and min scaled_fitness)
 max_scaled_fitness_rows <- df %>%
   group_by(Pos) %>%
   summarise(min_fitness = min(scaled_fitness),
@@ -810,7 +811,7 @@ summary_df <- df %>%
   summarise(min_fitness = min(scaled_fitness),
             max_fitness = max(scaled_fitness))
 
-### find top label
+### find top and bottom label (max and min scaled_fitness)
 max_scaled_fitness_rows <- df %>%
   group_by(Pos) %>%
   summarise(min_fitness = min(scaled_fitness),
@@ -827,8 +828,9 @@ insID_effect_var_plot()
 
 #########################################################################################################
 #########################################################################################################
-##### del sub plots. 
+##### delSub plots. 
 
+## isolate the delsubs and single deletions
 delsubs <- scaled_variants_aPCA[scaled_variants_aPCA$mut_type  == "delSub", c("Pos", "domain", "scaled_fitness", "scaled_sigma")]
 singledels <- scaled_variants_aPCA[scaled_variants_aPCA$type  == "singleDEL", c("Pos", "domain", "scaled_fitness", "scaled_sigma")]
 
