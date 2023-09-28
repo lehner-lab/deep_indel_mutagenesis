@@ -13,7 +13,7 @@ rep_seq <- c(scaled_variants_aPCA$aa_seq)
 
 ## load the data from the fitness replicate  DimSum file that contains fitness estimates for all 3 replicates
 # load raw data data for 7 doms
-input_file_path <- paste(dimsum_file_path, "aPCA_domains_variant_data_merge.RData",sep="")
+input_file_path <- paste(dimsum_file_path, "aPCA_domains_fitness_replicates.RData",sep="")
 load(input_file_path)
 
 replicates<-all_variants[,c(2,17:22)]
