@@ -55,8 +55,9 @@ conda install -c conda-forge r-base r-dplyr r-modeest r-stringr r-strex r-data.t
 * **[006_figure5_main](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/006_figure5_main.R)** Reproduce Fig. 5
 * **[006_figure5_extended](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/006_figure5_extended.R)** Reproduce Extended Fig. 5
 
-Stage 000_load_functions and 01_split_data should be run first. 
-The following stages can be run independently as long as they are run in pairs (if you want to run 003_figure2_extended, you should run 003_figure2_main first). 
+000_load_functions and 01_split_data should be run first if i) you want to reproduce the final data frames from raw data and ii) if you want to work with the pre-processed data frames. 
+
+Scripts to reproduce the figures can be run independently as long as they are run in pairs (if you want to run 003_figure2_extended, you should run 003_figure2_main first). 
 
 
 
