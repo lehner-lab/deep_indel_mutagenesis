@@ -5,9 +5,9 @@ scatter_for_fig2_2 <- function(df1, df2){
     summarize(
       mean_sub_pos = mean(scaled_fitness)
     )
-
-    colnames(df2)[4] <- "Mut"
-
+  
+  colnames(df2)[4] <- "Mut"
+  
   variation_data_mut_ins <- df2 %>%
     group_by(Mut) %>%
     summarize(
