@@ -8,7 +8,7 @@ load_coefficents_data_dels <- function(directory_path){
   
   list_coef<-c()
   for (i in 1:length(file_list)){
-    pdb_name<-substr(file_list[[i]], 104, 107)
+    pdb_name<-substr(file_list[[i]], 113, 116) ## adjust this number to the pdb name in the file_list path
     tmp<-readRDS(file_list[[i]])
     
     

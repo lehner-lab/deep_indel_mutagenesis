@@ -105,7 +105,7 @@ encoded_data_for_predictor <- function(){
   
   ddG_ml_encoded<-ddG_ml_encoded[,c("pdb_name", "Pos", "ddG_ML_dels","ddG_ML_ins", "ddG_ML_subs",
                                     "resid", "simple_struc","structure_before", "structure_after",
-                                    "align_to_center", "direct_neighbour_n", "direct_neighbour_c", 
+                                    "align_to_center", "neighbour_n", "neighbour_c", 
                                     "align_to_center_termini", "length")]
   return(list(ddG_ml_encoded = ddG_ml_encoded))
   
