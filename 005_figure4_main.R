@@ -4,15 +4,16 @@
 
 ############################################################################
 ### CADD, PROVEAN, ESMv1, DDMut.
+## these df were loaded through step 000: additional_dfs.rds
 
 ###### CADD
-###  merge subs
+###  merge CADD subs with ddG_subs
 colnames(CADD_subs)[6] <- "mut"
 CADD_subs <- merge(CADD_subs,
                          tsuboyama_nat_doms_structure_subs[,c("pdb_name", "mut", "ddG_ML")],
                          by=c("pdb_name", "mut"))
 
-###  merge indels
+###  merge CADD indels with ddG_indels
 CADD_insA <- merge(CADD_insA,
                            tsuboyama_nat_doms_all[,c("Pos", "pdb_name", "ddG_ML_dels", "ddG_ML_ins")],
                            by = c("Pos", "pdb_name"))
@@ -35,7 +36,7 @@ CADD_subs <- CADD_subs[rows_to_keep,]
 rows_to_keep <- which(CADD_indels$pdb_name %in% unique(CADD_subs$pdb_name))
 CADD_indels <- CADD_indels[rows_to_keep,]
 
-## caluclate correlation scores for the combined histograms. 
+## calculate correlation scores for the combined histograms. 
 cor_subs<-data.frame()
 for (i in unique(CADD_subs$pdb_name)){
   if (nrow(CADD_subs[CADD_subs$pdb_name == i,])>3){
@@ -118,18 +119,20 @@ legend("topleft",
        bty = "n"
 )
 
+## calculate the mode of the distribution
 mlv(na.omit(cor_subs$R),method="naive")
 mlv(na.omit(cor_ins$R),method="naive")
 mlv(na.omit(cor_dels$R),method="naive")
 
 ##########################################
 ###### PROVEAN
-###  merge subs
+
+###  merge subs PROVEAN scores with ddG_subs
 provean_subs <- merge(provean_subs,
                       tsuboyama_nat_doms_structure_subs[,c("pdb_name", "mut", "ddG_ML")],
                       by=c("pdb_name", "mut"))
 
-###  merge indels
+###  merge subs PROVEAN indel with ddG_indels
 provean_insA <- merge(provean_insA,
                       tsuboyama_nat_doms_all[,c("Pos", "pdb_name", "ddG_ML_dels", "ddG_ML_ins")],
                       by = c("Pos", "pdb_name"))
@@ -233,6 +236,8 @@ legend("topleft",
        bty = "n"
 )
 
+
+## calculate the mode of the distribution
 mlv(na.omit(cor_subs$R),method="naive")
 mlv(na.omit(cor_ins$R),method="naive")
 mlv(na.omit(cor_dels$R),method="naive")
@@ -247,10 +252,10 @@ q3 <- quantile(na.omit(-cor_dels$R), 0.75)
 
 
 ##########################################
-###### PROVEAN
-###  merge subs
-esm1v_subs <- esm1v_predictions
+###### ESM1v
 
+###  merge ESM1v scores for substitutions with ddG_subs
+esm1v_subs <- esm1v_predictions
 esm1v_subs <- merge(esm1v_subs,
                     tsuboyama_nat_doms_structure_subs[,c("pdb_name", "mut", "ddG_ML")],
                     by=c("pdb_name", "mut"))
@@ -297,7 +302,8 @@ mlv(na.omit(cor_subs$R),method="naive")
 
 ##########################################
 #### DDMut
-###  merge subs
+
+###  merge DDMut scores for substitutions with ddG_subs
 ddmut_subs <- ddmut_predictions
 ddmut_subs <- merge(ddmut_subs,
                     tsuboyama_nat_doms_structure_subs[,c("pdb_name", "mut", "ddG_ML")],
@@ -342,36 +348,39 @@ mlv(na.omit(cor_subs$R),method="naive")
 ############################################################################
 ### figure c): the cross-validation for models 1-5 (deletions)
 
-### first I need to process the data to run the cross-validation and different models.
-result <- encoded_data_for_predictor()
-ddG_ml_encoded <- result[[1]]
+#### This part of the script only needs to be run if you are interested in encoding the data for the predictor and reproducing the data yourself.
+#### This part is commented out so uncomment if you want to run the function. 
+
+## first process the data to run the cross-validation and different models.
+# result <- encoded_data_for_predictor()
+# ddG_ml_encoded <- result[[1]]
 
 ## define location where you want to save this .rds
-output_location<-output_location_ddGencoded
-output_name<-"ddG_ml_encoded.rds"
+# output_location<-output_location_ddGencoded
+# output_name<-"ddG_ml_encoded.rds"
 
-saveRDS(list(ddG_ml_encoded), 
-        file=paste(output_location,
-                   output_name, sep="/"))
+#saveRDS(list(ddG_ml_encoded), 
+ #       file=paste(output_location,
+  #                 output_name, sep="/"))
 
-
-############################################################################
-## for the next step, you also need the ddMut file with predictions for all tsyboyama substitutions: ddmut_prediction_mean.rds
-## already loaded in step 00_x
 
 ############################################################################
-## the next step was run on the CRG cluster using paralisation. 
-# the script to run the cross-validation for deletion effect prediction is called: ddG_deletions_published.R
+## for the next step, you also need the ddMut file with predictions for all tsyboyama substitutions
+## already loaded in step 000: additional_dfs.rds
+############################################################################
+## the next step was run on the CRG UGE batch system using a job array. 
+# the script to run the cross-validation for deletion effect prediction is called: ddG_deletions_models.R and can be downloaded from one-drive: https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis&view=0 
 
-## IF you want to run the predictor yourself load the data for deletions predictor
+## if you ran to the predictor yourself you can use the script below to load your data.
+# you need to define your output folder
 #output_folder = ""
 #result <- load_deletion_prediction_data(output_folder)
 #file_list<-result
 
-# IF you want to use the data without running the predictor yourself, use this: file_list_deletions_models
+# if you want to use the data generated by us, without running the predictor yourself, use this file loaded in the 000 step: file_list_deletions_models
 file_list <- file_list_deletions_models
 
-## models use the scripts below to get correlation coefficient for predicted vs observed for all the models
+## use the scripts below to get correlation coefficient for predicted vs observed for all the models
 result <- cor_predictor_m1()
 model1_del <- result[[1]]
 
@@ -408,7 +417,7 @@ hist(model1_del$Pearson,
 
 # Add the second histogram with a different color
 hist(model2_del$Pearson, 
-     breaks = 20,
+     breaks = 30,
      add = TRUE, # Add the histogram to the existing plot
      col = adjustcolor("grey40", alpha.f=0.6), # Set the color for the second histogram
      border = "black" # Set the border color for the second histogram
@@ -431,6 +440,7 @@ legend("left",
 )
 
 
+## calculate the modes of the distributions
 mlv(na.omit(model1_del$Pearson),method="naive")
 mlv(na.omit(model2_del$Pearson),method="naive")
 mlv(na.omit(model3_del$Pearson),method="naive")
@@ -469,6 +479,7 @@ legend("left",
        bty = "n", cex = 1.5
 )
 
+## calculate the modes of the distributions
 mlv(model4_del$Pearson, method="naive")
 mlv(model5_del$Pearson, method="naive")
 
@@ -502,6 +513,7 @@ legend("left",
        bty = "n", cex=1.5
 )
 
+## calculate the modes of the distributions
 mlv(na.omit(model1p_del$Pearson),method="naive")
 mlv(na.omit(model5p_del$Pearson),method="naive")
 
@@ -509,18 +521,19 @@ mlv(na.omit(model5p_del$Pearson),method="naive")
 ### figure c): the cross-validation for models 1-5 (insertions)
 
 ############################################################################
-## the next step was run on the CRG cluster using paralisation. 
-# the script to run the cross-validation for insetion effect prediction is called: ddG_insertions_published.R
+## the next step was run on the CRG UGE batch system using a job array. 
+# the script to run the cross-validation for deletion effect prediction is called: ddG_insertions_models.R and can be downloaded from one-drive: https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis&view=0 
 
-## IF you want to run the predictor yourself load the data for insertions predictor
+## if you ran to the predictor yourself you can use the script below to load your data.
+# you need to define your output folder
 #output_folder = ""
-#result <- load_deletion_prediction_data(output_folder)
+#result <- load_deletion_prediction_data(output_folder) ## same function as for deletions can be used here
 #file_list<-result
 
-# IF you want to use the data without running the predictor yourself, use this: file_list_insertions_models
+# if you want to use the data generated by us, without running the predictor yourself, use this file loaded in the 000 step: file_list_insertions_models
 file_list <- file_list_insertions_models
 
-## model use the scripts below to get correlation coefficient for predicted vs observed for all the model
+## use the scripts below to get correlation coefficient for predicted vs observed for all the models
 result <- cor_predictor_m1()
 model1_ins <- result[[1]]
 
@@ -579,6 +592,7 @@ legend("left",
        bty = "n", cex=1.5
 )
 
+## calculate modes of the distributions
 mlv(na.omit(model1_ins$Pearson),method="naive")
 mlv(na.omit(model2_ins$Pearson),method="naive")
 mlv(na.omit(model3_ins$Pearson),method="naive")
@@ -619,6 +633,7 @@ legend("left",
        bty = "n", cex=1.5
 )
 
+## calculate modes of the distributions
 mlv(na.omit(model4_ins$Pearson),method="naive")
 mlv(na.omit(model5_ins$Pearson),method="naive")
 
@@ -653,6 +668,7 @@ legend("left",
        bty = "n", cex=1.5
 )
 
+## calculate modes of the distributions
 mlv(na.omit(model1p_ins$Pearson),method="naive")
 mlv(na.omit(model5p_ins$Pearson),method="naive")
 
