@@ -36,6 +36,9 @@ CADD_subs <- CADD_subs[rows_to_keep,]
 rows_to_keep <- which(CADD_indels$pdb_name %in% unique(CADD_subs$pdb_name))
 CADD_indels <- CADD_indels[rows_to_keep,]
 
+## save the pdb_names for the Extended Figure 4. plots. 
+cadd_pdbs_in_tsuboyama <- unique(CADD_indels$pdb_name)
+
 ## calculate correlation scores for the combined histograms. 
 cor_subs<-data.frame()
 for (i in unique(CADD_subs$pdb_name)){
