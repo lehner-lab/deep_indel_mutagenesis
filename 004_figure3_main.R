@@ -4,7 +4,7 @@
 
 #########################################################################################################
 #########################################################################################################
-##### scatter plots a)
+##### scatter plots with mutation types vs rSASA a)
 
 ## calculate mean_sub/position
 grb2_mean_sub <- calculate_meansub_pos("GRB2-SH3")
@@ -27,7 +27,7 @@ pdz3_mean_sub <- pdz3_mean_sub[!duplicated(pdz3_mean_sub),]
 grb2_pdz3_mean_sub<-rbind(grb2_mean_sub,
                           pdz3_mean_sub)
 
-## plot
+## plot rSASA vs subs
 scatter_figure_3_rSASA_subs(grb2_pdz3_mean_sub)
 
 cor.test(grb2_pdz3_mean_sub[grb2_pdz3_mean_sub$domain=="GRB2-SH3",]$scaled_fitness_mean,
@@ -39,7 +39,7 @@ cor.test(grb2_pdz3_mean_sub[grb2_pdz3_mean_sub$domain=="PSD95-PDZ3",]$scaled_fit
          method="pearson")
 
 
-### now for CCC ins vs rSASA. 
+### now CCC ins vs rSASA. 
 df <- scaled_variants_aPCA[scaled_variants_aPCA$domain %in% c("GRB2-SH3", "PSD95-PDZ3") & scaled_variants_aPCA$type == "singleINS", c("rSASA", "Pos", "domain", "scaled_fitness", "scaled_sigma")]
 
 scatter_figure_3_rSASA_indels(df)+
@@ -70,9 +70,9 @@ cor.test(df[df$domain=="PSD95-PDZ3",]$rSASA,
 
 #########################################################################################################
 #########################################################################################################
-##### scatter plots b)
+##### histogram with Tsuboyama indels and substitutions vs rSASA b)
 
-#subs
+## calculate correlations for subs
 tsyboyama_rsasa_sub<-c()
 for (i in unique(tsuboyama_nat_doms_all$pdb_name)){
   if (nrow(tsuboyama_nat_doms_all[tsuboyama_nat_doms_all$pdb_name==i,])>3){
@@ -87,7 +87,7 @@ for (i in unique(tsuboyama_nat_doms_all$pdb_name)){
   }
 }
 
-# del
+## calculate correlations for dels
 tsyboyama_rsasa_del<-c()
 for (i in unique(tsuboyama_nat_doms_all$pdb_name)){
   if (nrow(tsuboyama_nat_doms_all[tsuboyama_nat_doms_all$pdb_name==i,])>3){
@@ -102,7 +102,7 @@ for (i in unique(tsuboyama_nat_doms_all$pdb_name)){
   }
 }
 
-## ins_after
+## calculate correlations for ins_after
 ins_after <- tsuboyama_nat_doms_all[,c("Pos", "pdb_name", "ddG_ML_ins", "rSASA")]
 ins_after$Pos <- ins_after$Pos -1
 
@@ -157,6 +157,7 @@ legend("left",
        bty = "n"
 )
 
+## calculate mode
 mlv(na.omit(tsyboyama_rsasa_sub$cor), method="naive")
 mlv(na.omit(tsyboyama_rsasa_del$cor), method="naive")
 mlv(na.omit(tsyboyama_rsasa_ins_after$cor), method="naive")
@@ -164,12 +165,15 @@ mlv(na.omit(tsyboyama_rsasa_ins_after$cor), method="naive")
 
 #########################################################################################################
 #########################################################################################################
-##### helix plots c)
+##### plot periodicity for helices across the Tsuboyama data set c)
+
+## isolate AlphaHelix data points
 alphahelix_ddG<-tsuboyama_nat_doms_all[tsuboyama_nat_doms_all$simple_struc=="AlphaHelix",]
-# count the elements. 
+
+## count the single AlphaHelices 
 unique_counts_alphahelix <- aggregate(element_no_simple ~ align_to_center, data = alphahelix_ddG, FUN = function(x) length(unique(x)))
 
-## plot: subs
+## plot: periodicity for substitutions; full version
 plot_periodity_helix(alphahelix_ddG$ddG_ML_subs,
                alphahelix_ddG$align_to_center,
                alphahelix_ddG,
@@ -178,7 +182,7 @@ plot_periodity_helix(alphahelix_ddG$ddG_ML_subs,
   xlab("realigned position")
 
 
-## version with collapsed residues before pos -6 and after pos 6
+## plot: periodicity for substitutions; version with collapsed edge residues
 ## create a new df. 
 result<-plot_periodity_df_collapsed(alphahelix_ddG,
                             c(min(alphahelix_ddG$align_to_center):-6),
@@ -189,11 +193,11 @@ result<-plot_periodity_df_collapsed(alphahelix_ddG,
 
 alphahelix_ddG_collapsed <- result[[1]]
 
-# count the elements. 
+## count the single AlphaHelices 
 unique_counts_alphahelix <- aggregate(element_no_simple ~ align_to_center, data = alphahelix_ddG_collapsed, FUN = function(x) length(unique(x)))
 
 
-## plot: ddG subs
+## plot: periodicity for substitutions
 plot_periodity_collapsed(alphahelix_ddG_collapsed$ddG_ML_subs, 
                          alphahelix_ddG_collapsed$align_to_center, 
                          alphahelix_ddG_collapsed, 
@@ -201,7 +205,7 @@ plot_periodity_collapsed(alphahelix_ddG_collapsed$ddG_ML_subs,
                          unique_counts_alphahelix)+
   ylab("ddG substitutions")
 
-## plot: ddG ins
+## plot: periodicity for insertions
 plot_periodity_collapsed(alphahelix_ddG_collapsed$ddG_ML_ins, 
                          alphahelix_ddG_collapsed$align_to_center, 
                          alphahelix_ddG_collapsed, 
@@ -209,7 +213,7 @@ plot_periodity_collapsed(alphahelix_ddG_collapsed$ddG_ML_ins,
                          unique_counts_alphahelix)+
   ylab("ddG insertions")
 
-## plot: ddG dels
+## plot: periodicity for deletions
 plot_periodity_collapsed(alphahelix_ddG_collapsed$ddG_ML_dels, 
                          alphahelix_ddG_collapsed$align_to_center, 
                          alphahelix_ddG_collapsed, 
@@ -219,12 +223,17 @@ plot_periodity_collapsed(alphahelix_ddG_collapsed$ddG_ML_dels,
   xlab("position in helix")
 
 
-##### strand plots c)
+#########################################################################################################
+#########################################################################################################
+##### plot periodicity for strands across the Tsuboyama data set d)
+
+## isolate Strand data points                                      
 strand_ddG<-tsuboyama_nat_doms_all[tsuboyama_nat_doms_all$simple_struc=="Strand",]
-# count the elements. 
+
+## count single Strands 
 unique_counts_strand <- aggregate(element_no_simple ~ align_to_center, data = strand_ddG, FUN = function(x) length(unique(x)))
 
-## plot: subs
+## plot: periodicity for substitutions
 plot_periodity_strand(strand_ddG$ddG_ML_subs,
                       strand_ddG$align_to_center,
                       strand_ddG,
@@ -232,7 +241,7 @@ plot_periodity_strand(strand_ddG$ddG_ML_subs,
   ylab("ddG substitutions")+
   xlab("position in strand")
 
-## plot: ins
+## plot: periodicity for insertions
 plot_periodity_strand(strand_ddG$ddG_ML_ins,
                       strand_ddG$align_to_center,
                       strand_ddG,
@@ -240,7 +249,7 @@ plot_periodity_strand(strand_ddG$ddG_ML_ins,
   ylab("ddG insertions")+
   xlab("position in strand")
 
-## plot: dels
+## plot: periodicity for deletions
 plot_periodity_strand(strand_ddG$ddG_ML_dels,
                       strand_ddG$align_to_center,
                       strand_ddG,
@@ -250,7 +259,7 @@ plot_periodity_strand(strand_ddG$ddG_ML_dels,
 
 #########################################################################################################
 #########################################################################################################
-##### violin plots e)
+##### violin plots comapring tolerance of mutation types across different secondary structure elements e)
 
 ## group data for n/termini 
 groups_ddG_ml<-rbind(data.frame(ddG=tsuboyama_nat_doms_all[tsuboyama_nat_doms_all$simple_struc %in% c("ntermini", "ctermini"),]$ddG_ML_subs,
