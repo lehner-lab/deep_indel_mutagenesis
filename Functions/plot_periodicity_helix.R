@@ -1,4 +1,4 @@
-plot_periodity_helix <- function(ddG, pos, y, counts){
+plot_periodity_helix <- function(ddG, pos, df, counts){
   
   ## find mean
   ddG_mean<-aggregate(ddG, by=list(pos),FUN=mean)
