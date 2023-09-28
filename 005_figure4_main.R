@@ -36,6 +36,9 @@ CADD_subs <- CADD_subs[rows_to_keep,]
 rows_to_keep <- which(CADD_indels$pdb_name %in% unique(CADD_subs$pdb_name))
 CADD_indels <- CADD_indels[rows_to_keep,]
 
+## for the script for the Extended Fig 4: save the domains that are overlapping between CADD subs and indels and tsuboyama data
+cadd_pdbs_in_tsuboyama <- unique(CADD_indels$pdb_name)
+
 ## calculate correlation scores for the combined histograms. 
 cor_subs<-data.frame()
 for (i in unique(CADD_subs$pdb_name)){
