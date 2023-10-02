@@ -38,6 +38,7 @@ grb2_fold_subs_hm+
            size=4.6)
 
 
+
 ############ PSD95-PDZ3: run function to plot the heatmap for substitutions
 result<-plot_heatmap_aPCA_pdz3_subs()
 pdz3_fold_subs_hm <- result[[1]]
@@ -56,16 +57,16 @@ pdz3_fold_subs_hm +
   annotate(geom = "text",
            x = 1:52,
            y = min(pdz3_seq_code$Pos),
-           label = 1:52,
+           label = WT.Vectorised,
            color=pdz3_seq_code[c(1:52),]$color_seq,
            vjust = 2.8,
-           size=4) +
+           size=4)+
   annotate(geom = "text",
-           x = 1:52,
+           x = c(1,5,10,15,20,25,30,35,40,45,50),
            y = min(pdz3_seq_code$Pos),
-           label = WT.Vectorised,
-           vjust = 4.2,
-           size=4)
+           label = c(1,5,10,15,20,25,30,35,40,45,50),
+           vjust = 3.6,
+           size=4.6)
 
 ############ GRB2-SH3: run function to plot the heatmap for all insertions
 result<-plot_heatmap_aPCA_grb2_allins()
@@ -84,16 +85,16 @@ grb2_fold_allins_hm+
   annotate(geom = "text",
            x = 1:53,
            y = min(grb2_seq_code$Pos),
-           label = 1:53,
+           label = WT.Vectorised,
            color=grb2_seq_code[c(1:53),]$color_seq,
            vjust = 2.8,
-           size=4) +
+           size=4)+
   annotate(geom = "text",
-           x = 1:53,
+           x = c(1,5,10,15,20,25,30,35,40,45,50),
            y = min(grb2_seq_code$Pos),
-           label = WT.Vectorised,
-           vjust = 4.2,
-           size=4)
+           label = c(1,5,10,15,20,25,30,35,40,45,50),
+           vjust = 3.6,
+           size=4.6)
 
 ############ PSD95-PDZ3: run function to plot the heatmap for all insertions
 result<-plot_heatmap_aPCA_pdz3_allins()
@@ -112,16 +113,16 @@ pdz3_fold_allins_hm+
   annotate(geom = "text",
            x = 1:53,
            y = min(pdz3_seq_code$Pos),
-           label = 1:53,
+           label = WT.Vectorised,
            color=pdz3_seq_code[c(1:53),]$color_seq,
            vjust = 2.8,
-           size=4) +
+           size=4)+
   annotate(geom = "text",
-           x = 1:53,
+           x = c(1,5,10,15,20,25,30,35,40,45,50),
            y = min(pdz3_seq_code$Pos),
-           label = WT.Vectorised,
-           vjust = 4.2,
-           size=4)
+           label = c(1,5,10,15,20,25,30,35,40,45,50),
+           vjust = 3.6,
+           size=4.6)
 
 ############ GRB2-SH3: run function to plot the heatmap for insertion repeats
 result<-plot_heatmap_aPCA_grb2_ins()
@@ -138,12 +139,11 @@ grb2_fold_ins_hm+
         axis.text.x = element_blank()) +
   coord_cartesian(clip = "off")+
   annotate(geom = "text",
-           x = 1:53,
-           y = min(grb2_seq_code$Pos),
-           label = 1:53,
-           color=grb2_seq_code[c(1:53),]$color_seq,
-           vjust = 2.8,
-           size=4) 
+           x = c(1,5,10,15,20,25,30,35,40,45,50),
+           y = min(pdz3_seq_code$Pos),
+           label = c(1,5,10,15,20,25,30,35,40,45,50),
+           vjust = 2.5,
+           size=4.6)
 
 ############ GRB2-SH3: run function to plot the heatmap for deletions
 result<-plot_heatmap_aPCA_grb2_dels()
@@ -160,12 +160,11 @@ grb2_fold_dels_hm+
         axis.text.x = element_blank()) +
   coord_cartesian(clip = "off")+
   annotate(geom = "text",
-           x = 1:52,
-           y = min(grb2_seq_code$Pos),
-           label = 1:52,
-           color=grb2_seq_code[c(1:52),]$color_seq,
-           vjust = 2.8,
-           size=4) 
+           x = c(1,5,10,15,20,25,30,35,40,45,50),
+           y = min(pdz3_seq_code$Pos),
+           label = c(1,5,10,15,20,25,30,35,40,45,50),
+           vjust = 2.5,
+           size=4.6)
 
 ############ PSD95-PDZ3: run function to plot the heatmap for insertion repeats
 result<-plot_heatmap_aPCA_pdz3_ins()
@@ -182,12 +181,11 @@ pdz3_fold_ins_hm+
         axis.text.x = element_blank()) +
   coord_cartesian(clip = "off")+
   annotate(geom = "text",
-           x = 1:53,
+           x = c(1,5,10,15,20,25,30,35,40,45,50),
            y = min(pdz3_seq_code$Pos),
-           label = 1:53,
-           color=pdz3_seq_code[c(1:53),]$color_seq,
-           vjust = 2.8,
-           size=4) 
+           label = c(1,5,10,15,20,25,30,35,40,45,50),
+           vjust = 2.5,
+           size=4.6)
 
 ############ PSD95-PDZ3: run function to plot the heatmap for deletions
 result<-plot_heatmap_aPCA_pdz3_dels()
@@ -204,12 +202,11 @@ pdz3_fold_dels_hm+
         axis.text.x = element_blank()) +
   coord_cartesian(clip = "off")+
   annotate(geom = "text",
-           x = 1:52,
+           x = c(1,5,10,15,20,25,30,35,40,45,50),
            y = min(pdz3_seq_code$Pos),
-           label = 1:52,
-           color=pdz3_seq_code[c(1:52),]$color_seq,
-           vjust = 2.8,
-           size=4) 
+           label = c(1,5,10,15,20,25,30,35,40,45,50),
+           vjust = 2.5,
+           size=4.6)
 
 #########################################################################################################
 #########################################################################################################
