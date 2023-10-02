@@ -146,7 +146,7 @@ ggplot(cadd_provean_insA, aes(x = CADD_raw, y = provean_raw)) +
         legend.text = element_text(size = 18),
         legend.title = element_blank())
 
-cor.test(cadd_provean_insA$CADD_raw,
+cor.test(-cadd_provean_insA$CADD_raw,
          cadd_provean_insA$provean_raw,
          method="pearson")
 
@@ -178,7 +178,7 @@ ggplot(cadd_provean_dels, aes(x = CADD_raw, y = provean_raw)) +
         legend.text = element_text(size = 18),
         legend.title = element_blank())
 
-cor.test(cadd_provean_dels$CADD_raw,
+cor.test(-cadd_provean_dels$CADD_raw,
          cadd_provean_dels$provean_raw,
          method="pearson")
 
