@@ -56,8 +56,8 @@ make_lineplots_single_effects_subs <- function(x,y,q,z) {
     ylab("protein abundance")+
     theme_classic()+
     scale_y_continuous(limits=c(-0.63,1.41))+
-    scale_x_continuous(breaks = seq(1, max(z$Pos), by = 5), 
-                       labels = seq(1, max(z$Pos), by = 5) - 1,
+    scale_x_continuous(breaks = c(1, 5, 10, 15, 20, 25, 30, 35,40,45,50,55,60,65,70), 
+                       labels = c(1, 5, 10, 15, 20, 25, 30, 35,40,45,50,55,60,65,70),
                        expand = c(0, 0),
                        limits = c(1, max(z$Pos)))+
     geom_hline(yintercept = 1,
