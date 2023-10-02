@@ -630,8 +630,8 @@ hist(model4_ins$Pearson,
 
 # Add a legend to the left side of the plot
 legend("left",
-       legend = c("model4", "model5"),
-       fill = c(color2, color1),  # Transparent colors
+       legend = c("model5", "model4"),
+       fill = c(color1, color2),  # Transparent colors
        border = "black",
        bty = "n", cex=1.5
 )
