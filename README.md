@@ -19,13 +19,13 @@ To run the deep_indel_mutagenesis pipeline you will need the following software 
 
 # Required Data
 
-* i) Predictions from CADD, DDMut, ESM1v, PROVEAN, ii) STRIDE and rSASA information, together with iii)  additional dfs neccesery to run the pipleline should be downloaded as "additional_dfs.rds" from  **[here](__https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis&view=0)** 
+* i) Predictions from CADD, DDMut, ESM1v, PROVEAN, ii) STRIDE and rSASA information, together with iii)  additional dfs neccesery to run the pipleline should be downloaded as "additional_dfs.rds" from  **[here](https://zenodo.org/record/8402597)** 
 
-* DiMSum files neccesery for running the deep_indel_mutagenesis pipeline should be downloaded from **[here](__https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2FDiMSum&view=0)** 
+* DiMSum files neccesery for running the deep_indel_mutagenesis pipeline should be downloaded from **[here](https://zenodo.org/record/8402597)** 
 
 * **[_Tsuboyama et al. 2023_](https://www.nature.com/articles/s41586-023-06328-6)**  raw data ("Tsuboyama2023_Dataset2_Dataset3_20230416.csv") and the pdb files ("AlphaFold_model_PDBs") should be downloaded **[here](https://zenodo.org/record/7992926)** 
 
-* Pre-processed data for reproducing the figures can also be downloaded from **[here](__https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2Fpreprocessed%5Fdata&view=0)**
+* Pre-processed data for reproducing the figures can also be downloaded from **[here](https://zenodo.org/record/8402597)**
 
 # Installation Instructions
 
@@ -42,7 +42,7 @@ conda install -c conda-forge r-base r-dplyr r-modeest r-stringr r-strex r-data.t
   In stage 00 of the pipeline, we load and set folder location for the Required Data and load the Required Software
 
 * **[01_split_data](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/001_split_data.R)**
-  In stage 01 of the pipeline, we process the raw DiMSum files and call the indel and substitution variants.    Furthermore we process the **[_Tsuboyama et al. 2023_](https://www.nature.com/articles/s41586-023-06328-6)**  data set for further analysis. In this script you have an option to either process the data yourself (PART1, PART2 and PART3) or directly load the processed data frames for further analysis (skip to PART4 and download **[pre-processed data](__https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis%2Fpreprocessed%5Fdata&view=0)**).
+  In stage 01 of the pipeline, we process the raw DiMSum files and call the indel and substitution variants.    Furthermore we process the **[_Tsuboyama et al. 2023_](https://www.nature.com/articles/s41586-023-06328-6)**  data set for further analysis. In this script you have an option to either process the data yourself (PART1, PART2 and PART3) or directly load the processed data frames for further analysis (skip to PART4 and download **[pre-processed data](https://zenodo.org/record/8402597)**).
 
 * **[002_figure1_main](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/002_figure1_main.R)** Reproduce Fig. 1
 * **[002_figure1_extended](https://github.com/lehner-lab/deep_indel_mutagenesis/blob/main/002_figure1_extended.R)** Reproduce Extended Fig. 1
