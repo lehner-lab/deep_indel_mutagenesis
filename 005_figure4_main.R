@@ -368,11 +368,10 @@ mlv(na.omit(cor_subs$R),method="naive")
 
 
 ############################################################################
-## for the next step, you also need the ddMut file with predictions for all tsyboyama substitutions
-## already loaded in step 000: additional_dfs.rds
+## for the next step, you also need the ddMut file with predictions for all tsyboyama substitutions, already loaded in step 000: additional_dfs.rds
 ############################################################################
 ## the next step was run on the CRG UGE batch system using a job array. 
-# the script to run the cross-validation for deletion effect prediction is called: ddG_deletions_models.R and can be downloaded from one-drive: https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis&view=0 
+# the script to run the cross-validation for deletion effect prediction is called: ddG_deletions_models.R and can be downloaded from https://zenodo.org/record/8402597
 
 ## if you ran to the predictor yourself you can use the script below to load your data.
 # you need to define your output folder
@@ -525,8 +524,7 @@ mlv(na.omit(model5p_del$Pearson),method="naive")
 
 ############################################################################
 ## the next step was run on the CRG UGE batch system using a job array. 
-# the script to run the cross-validation for deletion effect prediction is called: ddG_insertions_models.R and can be downloaded from one-drive: https://crgcnag-my.sharepoint.com/personal/mtopolska_crg_es/_layouts/15/onedrive.aspx?login_hint=mtopolska%40crg%2Ees&id=%2Fpersonal%2Fmtopolska%5Fcrg%5Fes%2FDocuments%2FTopolska%5Fetal%5Fdeep%5Findel%5Fmutagenesis&view=0 
-
+# the script to run the cross-validation for deletion effect prediction is called: ddG_insertions_models.R and can be downloaded from https://zenodo.org/record/8402597
 ## if you ran to the predictor yourself you can use the script below to load your data.
 # you need to define your output folder
 #output_folder = ""
