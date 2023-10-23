@@ -105,21 +105,21 @@ normalise_pdz3_bind_data <- function() {
   pdz3_bind_allins$scaled_fitness<-pdz3_bind_allins$norm_fitness/syns
   pdz3_bind_singles$scaled_fitness<-pdz3_bind_singles$norm_fitness/syns
   
-  ## scale the error by dividing by the same factor: dividing by the squared root of the synonmous fitness
-  pdz3_bind_synonymous$scaled_sigma<-pdz3_bind_synonymous$sigma/sqrt(syns)
-  pdz3_bind_CX$scaled_sigma<-pdz3_bind_CX$sigma/sqrt(syns)
-  pdz3_bind_CXX$scaled_sigma<-pdz3_bind_CXX$sigma/sqrt(syns)
-  pdz3_bind_CXXX$scaled_sigma<-pdz3_bind_CXXX$sigma/sqrt(syns)
-  pdz3_bind_singleDEL$scaled_sigma<-pdz3_bind_singleDEL$sigma/sqrt(syns)
-  pdz3_bind_doubleDEL$scaled_sigma<-pdz3_bind_doubleDEL$sigma/sqrt(syns)
-  pdz3_bind_tripleDEL$scaled_sigma<-pdz3_bind_tripleDEL$sigma/sqrt(syns)
-  pdz3_bind_Delsub$scaled_sigma<-pdz3_bind_Delsub$sigma/sqrt(syns)
-  pdz3_bind_insAA$scaled_sigma<-pdz3_bind_insAA$sigma/sqrt(syns)
-  pdz3_bind_insCC$scaled_sigma<-pdz3_bind_insCC$sigma/sqrt(syns)
-  pdz3_bind_CNN$scaled_sigma<-pdz3_bind_CNN$sigma/sqrt(syns)
-  pdz3_bind_CNNN$scaled_sigma<-pdz3_bind_CNNN$sigma/sqrt(syns)
-  pdz3_bind_allins$scaled_sigma<-pdz3_bind_allins$sigma/sqrt(syns)
-  pdz3_bind_singles$scaled_sigma<-pdz3_bind_singles$sigma/sqrt(syns)
+  ## scale the error by dividing by the same factor: dividing by the weighted mean of the synonmous fitness
+  pdz3_bind_synonymous$scaled_sigma<-pdz3_bind_synonymous$sigma/(syns)
+  pdz3_bind_CX$scaled_sigma<-pdz3_bind_CX$sigma/(syns)
+  pdz3_bind_CXX$scaled_sigma<-pdz3_bind_CXX$sigma/(syns)
+  pdz3_bind_CXXX$scaled_sigma<-pdz3_bind_CXXX$sigma/(syns)
+  pdz3_bind_singleDEL$scaled_sigma<-pdz3_bind_singleDEL$sigma/(syns)
+  pdz3_bind_doubleDEL$scaled_sigma<-pdz3_bind_doubleDEL$sigma/(syns)
+  pdz3_bind_tripleDEL$scaled_sigma<-pdz3_bind_tripleDEL$sigma/(syns)
+  pdz3_bind_Delsub$scaled_sigma<-pdz3_bind_Delsub$sigma/(syns)
+  pdz3_bind_insAA$scaled_sigma<-pdz3_bind_insAA$sigma/(syns)
+  pdz3_bind_insCC$scaled_sigma<-pdz3_bind_insCC$sigma/(syns)
+  pdz3_bind_CNN$scaled_sigma<-pdz3_bind_CNN$sigma/(syns)
+  pdz3_bind_CNNN$scaled_sigma<-pdz3_bind_CNNN$sigma/(syns)
+  pdz3_bind_allins$scaled_sigma<-pdz3_bind_allins$sigma/(syns)
+  pdz3_bind_singles$scaled_sigma<-pdz3_bind_singles$sigma/(syns)
   
   
   ##fix mutation positions that are called wrong manually. 
