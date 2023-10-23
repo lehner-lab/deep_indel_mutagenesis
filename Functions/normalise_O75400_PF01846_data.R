@@ -158,7 +158,7 @@ normalise_O75400_PF01846_data <- function() {
   O75400_PF01846_Delsub$scaled_fitness<-O75400_PF01846_Delsub$norm_fitness/syns
   
   
-  ## scale the error by dividing by the same factor: dividing by the squared root of the synonmous fitness
+  ## scale the error by dividing by the same factor: dividing by the weighted mean of the synonmous fitness
   O75400_PF01846_syns$scaled_sigma<-O75400_PF01846_syns$sigma/(syns)
   O75400_PF01846_CX$scaled_sigma<-O75400_PF01846_CX$sigma/(syns)
   O75400_PF01846_CXX$scaled_sigma<-O75400_PF01846_CXX$sigma/(syns)
