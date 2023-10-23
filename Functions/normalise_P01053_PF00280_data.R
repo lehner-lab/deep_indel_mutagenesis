@@ -142,16 +142,16 @@ normalise_P01053_PF00280_data <- function() {
   syns<-sum(P01053_PF00280_syns$norm_fitness/(P01053_PF00280_syns$sigma^2))/sum(1/(P01053_PF00280_syns$sigma^2))
   
   ##normalise by dividing variants with the weighted mean of the synonymous variants
-  P01053_PF00280_syns$scaled_fitness<-P01053_PF00280_syns$norm_fitness/sqrt(syns)
-  P01053_PF00280_CX$scaled_fitness<-P01053_PF00280_CX$norm_fitness/sqrt(syns)
-  P01053_PF00280_CXX$scaled_fitness<-P01053_PF00280_CXX$norm_fitness/sqrt(syns)
-  P01053_PF00280_CXXX$scaled_fitness<-P01053_PF00280_CXXX$norm_fitness/sqrt(syns)
-  P01053_PF00280_singleDEL$scaled_fitness<-P01053_PF00280_singleDEL$norm_fitness/sqrt(syns)
-  P01053_PF00280_doubleDEL$scaled_fitness<-P01053_PF00280_doubleDEL$norm_fitness/sqrt(syns)
-  P01053_PF00280_tripleDEL$scaled_fitness<-P01053_PF00280_tripleDEL$norm_fitness/sqrt(syns)
-  P01053_PF00280_Delsub$scaled_fitness<-P01053_PF00280_Delsub$norm_fitness/sqrt(syns)
+  P01053_PF00280_syns$scaled_fitness<-P01053_PF00280_syns$norm_fitness/syns
+  P01053_PF00280_CX$scaled_fitness<-P01053_PF00280_CX$norm_fitness/syns
+  P01053_PF00280_CXX$scaled_fitness<-P01053_PF00280_CXX$norm_fitness/syns
+  P01053_PF00280_CXXX$scaled_fitness<-P01053_PF00280_CXXX$norm_fitness/syns
+  P01053_PF00280_singleDEL$scaled_fitness<-P01053_PF00280_singleDEL$norm_fitness/syns
+  P01053_PF00280_doubleDEL$scaled_fitness<-P01053_PF00280_doubleDEL$norm_fitness/syns
+  P01053_PF00280_tripleDEL$scaled_fitness<-P01053_PF00280_tripleDEL$norm_fitness/syns
+  P01053_PF00280_Delsub$scaled_fitness<-P01053_PF00280_Delsub$norm_fitness/syns
   
-  ## scale the error by dividing by the same factor: dividing by the squared root of the synonmous fitness
+  ## scale the error by dividing by the same factor: dividing by the weighted mean of the synonmous fitness
   P01053_PF00280_syns$scaled_sigma<-P01053_PF00280_syns$sigma/syns
   P01053_PF00280_CX$scaled_sigma<-P01053_PF00280_CX$sigma/syns
   P01053_PF00280_CXX$scaled_sigma<-P01053_PF00280_CXX$sigma/syns
