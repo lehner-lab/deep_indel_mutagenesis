@@ -164,15 +164,15 @@ normalise_P61024_PF01111_data <- function() {
   P61024_PF01111_Delsub$scaled_fitness<-P61024_PF01111_Delsub$norm_fitness/syns
   
   
-  ## scale the error by dividing by the same factor: dividing by the squared root of the synonmous fitness
-  P61024_PF01111_syns$scaled_sigma<-P61024_PF01111_syns$sigma/sqrt(syns)
-  P61024_PF01111_CX$scaled_sigma<-P61024_PF01111_CX$sigma/sqrt(syns)
-  P61024_PF01111_CXX$scaled_sigma<-P61024_PF01111_CXX$sigma/sqrt(syns)
-  P61024_PF01111_CXXX$scaled_sigma<-P61024_PF01111_CXXX$sigma/sqrt(syns)
-  P61024_PF01111_singleDEL$scaled_sigma<-P61024_PF01111_singleDEL$sigma/sqrt(syns)
-  P61024_PF01111_doubleDEL$scaled_sigma<-P61024_PF01111_doubleDEL$sigma/sqrt(syns)
-  P61024_PF01111_tripleDEL$scaled_sigma<-P61024_PF01111_tripleDEL$sigma/sqrt(syns)
-  P61024_PF01111_Delsub$scaled_sigma<-P61024_PF01111_Delsub$sigma/sqrt(syns)
+  ## scale the error by dividing by the same factor: dividing by the weighted mean of the synonmous fitness
+  P61024_PF01111_syns$scaled_sigma<-P61024_PF01111_syns$sigma/(syns)
+  P61024_PF01111_CX$scaled_sigma<-P61024_PF01111_CX$sigma/(syns)
+  P61024_PF01111_CXX$scaled_sigma<-P61024_PF01111_CXX$sigma/(syns)
+  P61024_PF01111_CXXX$scaled_sigma<-P61024_PF01111_CXXX$sigma/(syns)
+  P61024_PF01111_singleDEL$scaled_sigma<-P61024_PF01111_singleDEL$sigma/(syns)
+  P61024_PF01111_doubleDEL$scaled_sigma<-P61024_PF01111_doubleDEL$sigma/(syns)
+  P61024_PF01111_tripleDEL$scaled_sigma<-P61024_PF01111_tripleDEL$sigma/(syns)
+  P61024_PF01111_Delsub$scaled_sigma<-P61024_PF01111_Delsub$sigma/(syns)
 
   #### test if the change in fitness is signifcant
   ## we need to test for significance for values > and < than 1.  
