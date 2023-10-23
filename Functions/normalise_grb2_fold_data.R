@@ -104,21 +104,21 @@ normalise_grb2_fold_data <- function() {
   grb2_fold_allins$scaled_fitness<-grb2_fold_allins$norm_fitness/syns
   grb2_fold_singles$scaled_fitness<-grb2_fold_singles$norm_fitness/syns
   
-  ## scale the error by dividing by the same factor: dividing by the squared root of the synonmous fitness
-  grb2_fold_synonymous$scaled_sigma<-grb2_fold_synonymous$sigma/sqrt(syns)
-  grb2_fold_CX$scaled_sigma<-grb2_fold_CX$sigma/sqrt(syns)
-  grb2_fold_CXX$scaled_sigma<-grb2_fold_CXX$sigma/sqrt(syns)
-  grb2_fold_CXXX$scaled_sigma<-grb2_fold_CXXX$sigma/sqrt(syns)
-  grb2_fold_singleDEL$scaled_sigma<-grb2_fold_singleDEL$sigma/sqrt(syns)
-  grb2_fold_doubleDEL$scaled_sigma<-grb2_fold_doubleDEL$sigma/sqrt(syns)
-  grb2_fold_tripleDEL$scaled_sigma<-grb2_fold_tripleDEL$sigma/sqrt(syns)
-  grb2_fold_Delsub$scaled_sigma<-grb2_fold_Delsub$sigma/sqrt(syns)
-  grb2_fold_insAA$scaled_sigma<-grb2_fold_insAA$sigma/sqrt(syns)
-  grb2_fold_insCC$scaled_sigma<-grb2_fold_insCC$sigma/sqrt(syns)
-  grb2_fold_CNN$scaled_sigma<-grb2_fold_CNN$sigma/sqrt(syns)
-  grb2_fold_CNNN$scaled_sigma<-grb2_fold_CNNN$sigma/sqrt(syns)
-  grb2_fold_allins$scaled_sigma<-grb2_fold_allins$sigma/sqrt(syns)
-  grb2_fold_singles$scaled_sigma<-grb2_fold_singles$sigma/sqrt(syns)
+  ## scale the error by dividing by the same factor: dividing by the weighted mean of the synonmous fitness
+  grb2_fold_synonymous$scaled_sigma<-grb2_fold_synonymous$sigma/(syns)
+  grb2_fold_CX$scaled_sigma<-grb2_fold_CX$sigma/(syns)
+  grb2_fold_CXX$scaled_sigma<-grb2_fold_CXX$sigma/(syns)
+  grb2_fold_CXXX$scaled_sigma<-grb2_fold_CXXX$sigma/(syns)
+  grb2_fold_singleDEL$scaled_sigma<-grb2_fold_singleDEL$sigma/(syns)
+  grb2_fold_doubleDEL$scaled_sigma<-grb2_fold_doubleDEL$sigma/(syns)
+  grb2_fold_tripleDEL$scaled_sigma<-grb2_fold_tripleDEL$sigma/(syns)
+  grb2_fold_Delsub$scaled_sigma<-grb2_fold_Delsub$sigma/(syns)
+  grb2_fold_insAA$scaled_sigma<-grb2_fold_insAA$sigma/(syns)
+  grb2_fold_insCC$scaled_sigma<-grb2_fold_insCC$sigma/(syns)
+  grb2_fold_CNN$scaled_sigma<-grb2_fold_CNN$sigma/(syns)
+  grb2_fold_CNNN$scaled_sigma<-grb2_fold_CNNN$sigma/(syns)
+  grb2_fold_allins$scaled_sigma<-grb2_fold_allins$sigma/(syns)
+  grb2_fold_singles$scaled_sigma<-grb2_fold_singles$sigma/(syns)
   
   ##fix mutation positions that are called wrong manually. 
   # this is just an artifact of the function used to call the positions of difference and differing aa sequence
