@@ -159,14 +159,14 @@ normalise_O75400_PF01846_data <- function() {
   
   
   ## scale the error by dividing by the same factor: dividing by the squared root of the synonmous fitness
-  O75400_PF01846_syns$scaled_sigma<-O75400_PF01846_syns$sigma/sqrt(syns)
-  O75400_PF01846_CX$scaled_sigma<-O75400_PF01846_CX$sigma/sqrt(syns)
-  O75400_PF01846_CXX$scaled_sigma<-O75400_PF01846_CXX$sigma/sqrt(syns)
-  O75400_PF01846_CXXX$scaled_sigma<-O75400_PF01846_CXXX$sigma/sqrt(syns)
-  O75400_PF01846_singleDEL$scaled_sigma<-O75400_PF01846_singleDEL$sigma/sqrt(syns)
-  O75400_PF01846_doubleDEL$scaled_sigma<-O75400_PF01846_doubleDEL$sigma/sqrt(syns)
-  O75400_PF01846_tripleDEL$scaled_sigma<-O75400_PF01846_tripleDEL$sigma/sqrt(syns)
-  O75400_PF01846_Delsub$scaled_sigma<-O75400_PF01846_Delsub$sigma/sqrt(syns)
+  O75400_PF01846_syns$scaled_sigma<-O75400_PF01846_syns$sigma/(syns)
+  O75400_PF01846_CX$scaled_sigma<-O75400_PF01846_CX$sigma/(syns)
+  O75400_PF01846_CXX$scaled_sigma<-O75400_PF01846_CXX$sigma/(syns)
+  O75400_PF01846_CXXX$scaled_sigma<-O75400_PF01846_CXXX$sigma/(syns)
+  O75400_PF01846_singleDEL$scaled_sigma<-O75400_PF01846_singleDEL$sigma/(syns)
+  O75400_PF01846_doubleDEL$scaled_sigma<-O75400_PF01846_doubleDEL$sigma/(syns)
+  O75400_PF01846_tripleDEL$scaled_sigma<-O75400_PF01846_tripleDEL$sigma/(syns)
+  O75400_PF01846_Delsub$scaled_sigma<-O75400_PF01846_Delsub$sigma/(syns)
   
   #### test if the change in fitness is signifcant
   ## we need to test for significance for values > and < than 1.  
